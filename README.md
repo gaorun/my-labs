@@ -9,6 +9,7 @@
 自动化 Bear 笔记应用的技能，使用 x-callback-url 协议实现笔记的创建、编辑、搜索和管理。
 
 **功能特性**：
+
 - 创建和编辑笔记（支持文本、剪贴板、HTML 转换）
 - 搜索和打开笔记
 - 标签管理（创建、重命名、删除、获取列表）
@@ -17,6 +18,7 @@
 - Python 和 Shell 脚本支持
 
 **快速开始**：
+
 ```bash
 # 使用 Python
 python3 bear-automation/scripts/bear_helper.py create --title "测试" --text "内容"
@@ -33,12 +35,14 @@ bear_create --title "测试" --text "内容"
 ### 安装技能
 
 1. 克隆仓库：
+
 ```bash
 git clone https://github.com/YOUR_USERNAME/skills.git
 cd skills
 ```
 
 2. 选择需要的技能并查看其文档：
+
 ```bash
 cd bear-automation
 cat README.md
@@ -49,6 +53,7 @@ cat README.md
 ### 在 Claude Code 中使用
 
 当你在 Claude Code 中提到相关任务时，对应的技能会自动触发。例如：
+
 - "帮我在 Bear 中创建一个笔记" → 触发 bear-automation 技能
 - "生成一个 Bear URL 来添加内容" → 触发 bear-automation 技能
 
@@ -83,6 +88,7 @@ skill-name/
 ### 技能开发指南
 
 **SKILL.md 格式**：
+
 ```markdown
 ---
 name: skill-name
@@ -95,6 +101,7 @@ description: 技能描述，包含触发条件和使用场景
 ```
 
 **最佳实践**：
+
 - 提供清晰的使用示例
 - 包含错误处理说明
 - 添加测试脚本
@@ -111,16 +118,17 @@ description: 技能描述，包含触发条件和使用场景
 ## 🔧 技能要求
 
 ### 必需文件
+
 - `SKILL.md` - Claude Code 使用的主文档
 - `README.md` - 用户文档
 
 ### 推荐文件
+
 - `scripts/` - 辅助脚本目录
 - `references/` - 参考文档目录
-- `INSTALL.md` - 安装指南
-- `CHANGELOG.md` - 更新日志
 
 ### 可选文件
+
 - `tests/` - 测试脚本
 - `examples/` - 示例代码
 - `.gitignore` - Git 忽略文件
@@ -135,8 +143,8 @@ description: 技能描述，包含触发条件和使用场景
 
 ## 📮 联系方式
 
-- 提交 Issue：[GitHub Issues](https://github.com/YOUR_USERNAME/skills/issues)
-- 讨论：[GitHub Discussions](https://github.com/YOUR_USERNAME/skills/discussions)
+- 提交 Issue：[GitHub Issues](https://github.com/gaorun/skills/issues)
+- 讨论：[GitHub Discussions](https://github.com/gaorun/skills/discussions)
 
 ## 🌟 Star History
 
