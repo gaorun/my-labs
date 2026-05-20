@@ -1,0 +1,56 @@
+# CLI
+
+The CLI is part of the `@raycast/api` package and is automatically installed in your extension directory during setup. To get a list of the available CLI commands, run the following command inside your extension directory:
+
+```bash
+ npx ray help
+```
+
+## Build
+
+`npx ray build` creates an optimized production build of your extension for distribution. This command is used by our CI to publish your extension to the store.
+
+You can use `npx ray build -e dist` to validate that your extension builds properly.
+
+## Development
+
+`npx ray develop` starts your extension in development mode. The mode includes the following:
+
+* Extension shows up at the top of the root search for quick access
+* Commands get automatically reloaded when you save your changes (you can toggle auto-reloading via Raycast Preferences > Advanced > "Auto-reload on save")
+* Error overlays include detailed stack traces for faster debugging
+* Log messages are displayed in the terminal
+* Status indicator is visible in the navigation title of the command to signal build errors
+* Imports the extension to Raycast if it wasn't before
+
+## Lint
+
+`npx ray lint` runs [ESLint](http://eslint.org) for all files in the `src` directory.
+
+## Migrate
+
+`npx ray migrate` [migrates](/misc/migration.md) your extension to the latest version of the `@raycast/api`.
+
+## Publish
+
+`npx ray publish` verifies, builds, and publishes an extension.
+
+If the extension is private (eg. has an `owner` and no public `access`), it will be published to the organization's private store. This command is only available to users that are part of that organization. Learn more about it [here](/teams/getting-started.md).
+
+
+---
+
+# Agent Instructions: Querying This Documentation
+
+If you need additional information that is not directly available in this page, you can query the documentation dynamically by asking a question.
+
+Perform an HTTP GET request on the current page URL with the `ask` query parameter:
+
+```
+GET https://developers.raycast.com/information/developer-tools/cli.md?ask=<question>
+```
+
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

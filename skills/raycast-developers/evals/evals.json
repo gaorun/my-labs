@@ -1,0 +1,100 @@
+{
+  "skill_name": "raycast-developers",
+  "evals": [
+    {
+      "id": 1,
+      "name": "clipboard-snippets-extension",
+      "prompt": "I want to build a Raycast extension that lets me save text snippets and quickly paste them. I often copy code snippets, emails, or URLs throughout the day and want a way to store them with labels so I can find and paste them later. What should I build and how?",
+      "expected_output": "A Raycast extension with commands to list saved snippets (with search/filter), add new snippets via form, and paste/copy them. Should include a List view, Form view, use Cache for persistence, and proper ActionPanel with paste/copy actions.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "produces_brainstorming",
+          "description": "Output includes a brainstorming document with clarifying questions asked to the user before implementation"
+        },
+        {
+          "name": "has_plan",
+          "description": "Output includes a plan document outlining the extension structure before code"
+        },
+        {
+          "name": "valid_manifest",
+          "description": "package.json has valid Raycast manifest structure with commands array and proper mode values"
+        },
+        {
+          "name": "uses_action_panel",
+          "description": "Extension code uses ActionPanel/Action components for user interactions (paste, copy, delete)"
+        },
+        {
+          "name": "uses_local_storage_or_cache",
+          "description": "Extension uses LocalStorage or Cache API for persisting snippets"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "api-status-menu-bar",
+      "prompt": "I need a Raycast menu bar extension that shows the status of my company's APIs. We have a health check endpoint at https://api.example.com/health that returns JSON like {\"status\":\"ok\",\"services\":[{\"name\":\"api\",\"status\":\"up\"},{\"name\":\"db\",\"status\":\"up\"}]}. I want the menu bar icon to be green when all services are up, yellow if some are down, and red if the endpoint is unreachable. It should refresh every 5 minutes.",
+      "expected_output": "A menu-bar command extension with background refresh at 5-minute interval, useFetch for API calls, dynamic menu bar icon (Color/green/yellow/red), and a dropdown list showing service statuses.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "produces_brainstorming",
+          "description": "Output includes a brainstorming document with clarifying questions asked to the user before implementation"
+        },
+        {
+          "name": "has_plan",
+          "description": "Output includes a plan document outlining the extension structure before code"
+        },
+        {
+          "name": "menu_bar_mode",
+          "description": "Manifest specifies mode: 'menu-bar' for the command"
+        },
+        {
+          "name": "has_interval",
+          "description": "Manifest has interval: '5m' or equivalent 5-minute refresh setting"
+        },
+        {
+          "name": "dynamic_icon",
+          "description": "Code changes the menu bar icon color based on API status (green/yellow/red)"
+        },
+        {
+          "name": "uses_fetch",
+          "description": "Code uses useFetch or fetch to call the health check endpoint"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "ai-commit-message-tool",
+      "prompt": "I want to create an AI extension tool for Raycast that generates git commit messages based on the git diff. The user should be able to @mention the extension in Quick AI and ask something like 'generate a commit message for my changes'. It should use the AI.ask API and read the git diff from the current directory.",
+      "expected_output": "An AI tool (not a regular command) that uses AI.ask to generate commit messages, reads git diff output, and is configured as a tool in the manifest with an ai.yaml for AI instructions.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "produces_brainstorming",
+          "description": "Output includes a brainstorming document with clarifying questions asked to the user before implementation"
+        },
+        {
+          "name": "has_plan",
+          "description": "Output includes a plan document outlining the extension structure before code"
+        },
+        {
+          "name": "tool_definition",
+          "description": "Manifest defines a tools array (not just commands) for AI tool usage"
+        },
+        {
+          "name": "uses_ai_ask",
+          "description": "Code uses AI.ask from @raycast/api to generate commit messages"
+        },
+        {
+          "name": "has_ai_yaml",
+          "description": "Includes an ai.yaml file with AI extension instructions for tool invocation context"
+        },
+        {
+          "name": "reads_git_diff",
+          "description": "Code reads git diff output (via child_process, exec, or similar) to get the changes"
+        }
+      ]
+    }
+  ]
+}
