@@ -3,8 +3,10 @@ name: obsidian-memo
 description: >
   在 Obsidian 中创建和查询个人记忆，帮助 AI 避免重复犯错。
   当用户说"记一下"、"记着"、"记住这个"时创建记忆；
-  当用户说"查一下"、"之前xxx"、"以往xxx"、"上次xxx"时查询记忆。
+  当用户说"查一下"、"之前xxx"、"以往xxx"、"上次xxx"时查询记忆；
+  当用户说"整理记忆"时合并相似记忆并清理已合并内容。
   当检测到用户在同一会话中反复纠正同一问题（2次及以上），自动创建记忆。
+  创建记忆前会检查是否存在相似记忆，存在则追加而非重复创建。
   依赖 obsidian-cli，如果该工具不可用则技能不触发。
 ---
 
@@ -29,7 +31,14 @@ description: >
 
 当用户说"记一下"或触发自动检测时，执行以下步骤：
 
-### 1. 确保目录存在
+### 1. 检查是否存在相似记忆
+
+在创建新记忆前，先查询现有记忆（见"查询记忆"章节的步骤 1-2），对比 description 属性判断是否存在相似或相近的记忆：
+
+- **如果存在相似记忆**：不创建新文件，而是用 `obsidian append` 将新内容追加到已有的记忆文件中。如果新内容导致该记忆的适用范围扩大，更新 description 属性。如果核心主题发生变化，用 `obsidian mv` 重命名文件。
+- **如果不存在相似记忆**：继续执行下面的步骤创建新文件。
+
+### 2. 确保目录存在
 
 ```bash
 obsidian create path="obsidian-memo/.gitkeep" content="" silent
@@ -37,7 +46,7 @@ obsidian create path="obsidian-memo/.gitkeep" content="" silent
 
 如果目录已存在，这一步不会创建新文件，只是确保路径可用。
 
-### 2. 生成文件名
+### 3. 生成文件名
 
 用当前时间戳作为文件名：
 
@@ -47,13 +56,13 @@ date +%Y-%m-%d-%H-%M-%S
 
 假设输出为 `2025-01-15-14-30-45`，则文件路径为 `obsidian-memo/2025-01-15-14-30-45.md`。
 
-### 3. 创建记忆文件
+### 4. 创建记忆文件
 
 ```bash
 obsidian create path="obsidian-memo/2025-01-15-14-30-45.md" content="## 正确做法\n（正确的做法）\n\n## 错误做法\n（之前犯的错误）\n\n## 背景\n（补充上下文）" silent
 ```
 
-### 4. 设置 frontmatter 属性
+### 5. 设置 frontmatter 属性
 
 ```bash
 obsidian property:set name="tags" value='["obsidian-memo"]' file="obsidian-memo/2025-01-15-14-30-45"
@@ -61,6 +70,10 @@ obsidian property:set name="tags" value='["obsidian-memo"]' file="obsidian-memo/
 
 ```bash
 obsidian property:set name="description" value="一句话摘要。适用场景：xxx。关键词：xxx, xxx" file="obsidian-memo/2025-01-15-14-30-45"
+```
+
+```bash
+obsidian property:set name="read_counter" value="0" file="obsidian-memo/2025-01-15-14-30-45"
 ```
 
 ### description 写法指南
@@ -109,14 +122,46 @@ obsidian base:query path="obsidian-memo.base" format=md
 obsidian read path="obsidian-memo/2025-01-15-14-30-45"
 ```
 
+读取成功后，将该记忆文件的 `read_counter` 属性自增 1：
+
+```bash
+obsidian property:set name="read_counter" value=<当前值+1> file="obsidian-memo/2025-01-15-14-30-45"
+```
+
 然后将内容呈现给用户。
+
+## 整理记忆
+
+当用户说"整理记忆"时，执行以下步骤：
+
+### 1. 查询所有记忆
+
+按照"查询记忆"章节的步骤获取所有记忆文件列表。
+
+### 2. 识别相似记忆
+
+对比所有记忆的 description 属性，找出内容相似或相近的记忆组。
+
+### 3. 合并记忆
+
+对于每组相似记忆：
+
+1. 创建新的记忆文件（使用当前时间戳命名），将相似记忆的内容合并整理到新文件中
+2. 新文件的 description 应覆盖合并前所有记忆的适用场景
+3. 设置新文件的 `tags` 为 `["obsidian-memo"]`
+4. 设置新文件的 `read_counter` 为合并前各记忆 read_counter 的总和
+5. 对被合并的旧记忆文件，用 `obsidian property:set` 在其 tags 中增加 `"merged"` 标记
+
+### 4. 更新 Base
+
+确保 Base 文件的 filters 中排除 tags 包含 "merged" 的记忆（见"初始化 Base"章节）。
 
 ## 初始化 Base
 
 如果 `obsidian-memo.base` 不存在，用以下命令创建：
 
 ```bash
-obsidian create path="obsidian-memo.base" content='filters:\n  and:\n    - file.hasTag("obsidian-memo")\n    - file.inFolder("obsidian-memo")\n\nproperties:\n  description:\n    displayName: "Description"\n\nviews:\n  - type: table\n    name: "All Memos"\n    order:\n      - file.name\n      - description\n      - file.mtime' silent
+obsidian create path="obsidian-memo.base" content='filters:\n  and:\n    - file.hasTag("obsidian-memo")\n    - file.inFolder("obsidian-memo")\n    - not:\n        - file.hasTag("merged")\n\nproperties:\n  description:\n    displayName: "Description"\n  read_counter:\n    displayName: "Read Count"\n\nviews:\n  - type: table\n    name: "All Memos"\n    order:\n      - file.name\n      - description\n      - read_counter\n      - file.mtime' silent
 ```
 
 Base 文件的作用是将所有记忆文件以表格形式展示，便于查询和浏览。
@@ -128,6 +173,7 @@ Base 文件的作用是将所有记忆文件以表格形式展示，便于查询
 description: "一句话摘要。适用场景：xxx。关键词：xxx, xxx, xxx"
 tags:
   - obsidian-memo
+read_counter: 0
 ---
 
 ## 正确做法
