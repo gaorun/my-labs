@@ -172,6 +172,8 @@ obsidian create path="obsidian-memo.base" content='filters:\n  and:\n    - file.
 
 Base 文件的作用是将所有记忆文件以表格形式展示，便于查询和浏览。
 
+**注意**：Obsidian Bases 的 `groupBy` 排序功能存在限制，无法可靠地按 `read_counter` 降序排列。用户可以在 Obsidian 中点击列头手动排序。
+
 ## 记忆文件模板
 
 ```markdown
