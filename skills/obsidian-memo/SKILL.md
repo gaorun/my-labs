@@ -125,6 +125,12 @@ obsidian read path="obsidian-memo/2025-01-15-14-30-45"
 读取成功后，将该记忆文件的 `read_counter` 属性自增 1：
 
 ```bash
+obsidian property:read name="read_counter" file="obsidian-memo/2025-01-15-14-30-45"
+```
+
+获取当前值后，设置为当前值 + 1：
+
+```bash
 obsidian property:set name="read_counter" value=<当前值+1> file="obsidian-memo/2025-01-15-14-30-45"
 ```
 
