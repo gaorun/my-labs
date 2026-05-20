@@ -4,19 +4,37 @@
     {
       "id": 1,
       "prompt": "记一下：这个项目里所有的 API 请求都要走 /api/v2 前缀，不要用 /api/v1",
-      "expected_output": "在 obsidian-memo 目录创建一个时间戳命名的 .md 文件，包含正确的 frontmatter（description、tags），正文记录 API 前缀的正确做法和错误做法",
+      "expected_output": "在 obsidian-memo 目录创建一个时间戳命名的 .md 文件，包含正确的 frontmatter（description、tags、read_counter=0），正文记录 API 前缀的正确做法和错误做法",
       "files": []
     },
     {
       "id": 2,
       "prompt": "查一下之前我让你记过的关于 API 前缀的事情",
-      "expected_output": "通过 base:query 查询 obsidian-memo.base，匹配到相关记忆并返回内容",
+      "expected_output": "通过 base:query 查询 obsidian-memo.base，匹配到相关记忆并返回内容，同时 read_counter 自增 1",
       "files": []
     },
     {
       "id": 3,
-      "prompt": "第一次对话：用户说"不要用 console.log 调试，要用 debugger"。第二次对话：用户说"我说了不要用 console.log，你怎么又用了"",
+      "prompt": "第一次对话：用户说\"不要用 console.log 调试，要用 debugger\"。第二次对话：用户说\"我说了不要用 console.log，你怎么又用了\"",
       "expected_output": "检测到重复纠正，自动创建记忆文件，记录调试方式的正确做法",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "记一下：接口返回的日期格式统一用 YYYY-MM-DD，不要用 YYYY/MM/DD",
+      "expected_output": "检查到没有相似记忆，创建新记忆文件",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "记一下：接口日期格式用 ISO 8601 标准",
+      "expected_output": "检查到已存在相似记忆（日期格式相关），将新内容追加到已有文件，更新 description",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "整理记忆",
+      "expected_output": "查询所有记忆，识别相似记忆组，合并到新文件，被合并的旧文件 tags 增加 merged 标记",
       "files": []
     }
   ]
