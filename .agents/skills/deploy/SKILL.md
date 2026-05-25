@@ -1,153 +1,105 @@
 ---
 name: deploy
 description: >-
-  my-labs 仓库发布部署指南。当用户需要发布 npm 包、更新版本、打 tag、
-  或执行任何发布相关任务时触发。涵盖 npm publish、版本管理、发布检查清单。
+  my-labs 仓库发布部署指南。当用户说"发布"、"publish"、"发版"、"更新版本"、
+  "打 tag"、"npm publish"、"发布到 npm"、"怎么发布"时触发。
+  涵盖 npm publish 流程、版本管理、Git Tag、回滚操作。
 ---
 
 # my-labs 发布指南
 
-## 发布体系
+## 发布体系概览
 
-my-labs 有三类产出，分发方式不同：
+| 产出类型     | 分发方式                 | 是否需要发布操作 |
+| ------------ | ------------------------ | ---------------- |
+| Agent Skills | Git 仓库（`skills add`） | **不需要**       |
+| CLI 工具     | npm（`@gaorun/my-cli`）  | 需要             |
+| 编辑器扩展   | npm（`@gaorun/*`）       | 需要             |
 
-| 产出类型     | 分发方式                | 说明                           |
-| ------------ | ----------------------- | ------------------------------ |
-| Agent Skills | `npx skills add <repo>` | 从 Git 仓库直接读取，无需发布  |
-| CLI 工具     | `npm publish`           | 发布到 npm（`@gaorun/my-cli`） |
-| 编辑器扩展   | `npm publish`           | 发布到 npm（`@gaorun/*`）      |
+> Skill 零发布成本——push 到 GitHub 即生效。只有 npm 包才走下面的发布流程。
 
-**重点**：只有 Agent Skills 无需发布操作，CLI 和 Extensions 都走 npm。
-
-## 发布前检查
+## 发布前检查（必须全部通过）
 
 ```bash
-# 1. 确保所有代码已提交
-git status
-
-# 2. 安装依赖 + 构建 + 测试
-pnpm install
-pnpm build
-pnpm test
-
-# 3. 检查版本号是否已更新
-cat packages/cli/package.json | grep version
+git status                    # 1. 工作区干净，无未提交变更
+pnpm install && pnpm build    # 2. 构建通过
+pnpm test                     # 3. 测试通过
+npm whoami                    # 4. 确认登录了正确的 npm 账号
 ```
 
-## CLI 发布流程（npm）
+> **为什么要先 git status？** npm publish 会打包当前工作区文件，未提交的调试代码可能被意外发布。
 
-### 1. 更新版本号
+## CLI 发布流程
 
-修改 `packages/cli/package.json` 中的 `version` 字段，遵循 [SemVer](https://semver.org/)：
+### 1. 更新版本
 
-- **major**: 不兼容的 API 变更
-- **minor**: 向后兼容的新功能
-- **patch**: 向后兼容的 bug 修复
+修改 `packages/cli/package.json` 中的 `version`，或使用 npm 命令：
 
 ```bash
-# 或使用 npm version 自动更新
 cd packages/cli
-npm version patch   # 0.1.0 → 0.1.1
-npm version minor   # 0.1.1 → 0.2.0
-npm version major   # 0.2.0 → 1.0.0
+npm version patch   # 0.1.0 → 0.1.1（bug fix）
+npm version minor   # 0.1.1 → 0.2.0（新功能）
+npm version major   # 0.2.0 → 1.0.0（破坏性变更）
 ```
 
-### 2. 构建
+> `npm version` 会自动创建 git commit 和 tag，推荐使用。
+
+### 2. 构建并发布
 
 ```bash
 cd packages/cli
 pnpm build
+npm publish --access public   # scoped package 必须加 --access public
 ```
 
-### 3. 发布
+### 3. 验证
 
 ```bash
-# 首次发布（scoped package 需 --access public）
-cd packages/cli
-npm publish --access public
-
-# 后续更新
-npm publish --access public
-```
-
-### 4. 验证
-
-```bash
-# 验证安装
-npx @gaorun/my-cli --help
-
-# 验证版本
-npm view @gaorun/my-cli version
-```
-
-## 多包统一发布（使用 Changesets）
-
-当 monorepo 中有多个 npm 包需要管理时，推荐使用 Changesets：
-
-```bash
-# 安装 Changesets
-pnpm add -Dw @changesets/cli
-pnpm changeset init
-
-# 创建变更记录
-pnpm changeset
-# 按提示选择变更的包和版本类型
-
-# 更新版本号
-pnpm changeset version
-
-# 构建 + 发布所有包
-pnpm build
-pnpm -r publish --access public
-```
-
-## 发布检查清单
-
-每项打勾确认：
-
-- [ ] 所有测试通过（`pnpm test`）
-- [ ] 构建成功（`pnpm build`）
-- [ ] 版本号符合 SemVer 规范
-- [ ] `CHANGELOG.md` 已更新（如适用）
-- [ ] Git 工作区干净，变更已提交
-- [ ] `npm whoami` 确认登录正确账号
-- [ ] `--access public` 确保 scoped package 可公开访问
-- [ ] 发布后验证安装和版本
-
-## 版本回滚
-
-如果发布了有问题的版本：
-
-```bash
-# 1. 撤销 npm 版本（24 小时内有效）
-npm unpublish @gaorun/my-cli@x.y.z
-
-# 2. 或发布修复版本（推荐）
-npm version patch
-pnpm build
-npm publish --access public
-
-# 3. 废弃标记旧版本（可选）
-npm deprecate @gaorun/my-cli@x.y.z "有安全漏洞，请升级到最新版本"
+npx @gaorun/my-cli --help          # 功能验证
+npm view @gaorun/my-cli version    # 版本验证
 ```
 
 ## Git Tag
 
-每次发布建议打 tag：
-
-```bash
-# 格式: v<package-name>@<version>
-git tag vmy-cli@0.1.0
-git push origin vmy-cli@0.1.0
-```
-
-或简化：
+每次发布必须打 tag（`npm version` 已自动创建时可跳过）：
 
 ```bash
 git tag v0.1.0
 git push origin v0.1.0
 ```
 
-## AGENTS.md 更新
+多包场景建议带包名前缀：`git tag vmy-cli@0.1.0`
 
-发布后更新 `AGENTS.md` 第 8 节「迭代记录」，追加发布说明。
+## 发布后
+
+1. 更新 `AGENTS.md` 第 8 节「迭代记录」
+2. 更新 `CHANGELOG.md`（如有）
+3. 推送到 GitHub：`git push && git push --tags`
+
+## 发布检查清单
+
+- [ ] `git status` 无未提交变更
+- [ ] `pnpm test` 全部通过
+- [ ] 版本号符合 SemVer
+- [ ] `npm whoami` 确认账号正确
+- [ ] 构建产物在 `dist/` 目录中
+- [ ] `npm publish` 使用了 `--access public`
+- [ ] 发布后 `npx @gaorun/my-cli --help` 可正常执行
+- [ ] Git tag 已推送
+
+## 问题修复：回滚与废弃
+
+```bash
+# 紧急撤回（24 小时内有效）
+npm unpublish @gaorun/my-cli@x.y.z
+
+# 推荐：发布修复版本（不破坏已安装用户）
+npm version patch
+pnpm build
+npm publish --access public
+
+# 标记旧版本为废弃（引导用户升级）
+npm deprecate @gaorun/my-cli@x.y.z "请升级到最新版本"
+```
+
+> 优先发布修复版本而非 unpublish——前者对已安装用户更安全。
