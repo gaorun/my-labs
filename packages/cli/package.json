@@ -1,0 +1,29 @@
+{
+  "name": "@gaorun/my-cli",
+  "version": "0.1.0",
+  "description": "One-command installer for all my-labs Agent Skills",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "bin": {
+    "my-cli": "./bin/run.js"
+  },
+  "oclif": {
+    "commands": "./dist/commands",
+    "dirname": "my-cli",
+    "plugins": [],
+    "bin": "my-cli"
+  },
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "clean": "shx rm -rf dist"
+  },
+  "dependencies": {
+    "@oclif/core": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "oclif": "^4.0.0",
+    "shx": "^0.3.4",
+    "typescript": "^5.7.0"
+  }
+}

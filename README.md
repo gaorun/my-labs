@@ -1,24 +1,58 @@
-# Skills
+# my-labs
 
-AI Agent 技能合集
+个人提效工具集 — Agent Skills · CLI · Extensions
 
-## 技能一览
+## 快速开始
 
-| 技能                                             | 说明                                                                                                                             |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
-| [fe-project-report](skills/fe-project-report/)   | 前端项目探索与报告生成。自动分析路由、页面功能、接口依赖、微服务使用情况和跳转关系，输出 HTML / Markdown / JSON 格式的项目报告。 |
-| [page-api-report](skills/page-api-report/)       | 页面接口发现报告。从前端视角按用户动线梳理单个页面的所有后端接口调用链路，输出给后端/测试阅读的接口分析报告。                    |
-| [name-it-to-tame-it](skills/name-it-to-tame-it/) | 命名降维法 — 给内耗、焦虑、压力起一个专属外号，主动降低负面感受，从沉浸切换到观察。                                              |
-| [obsidian-memo](skills/obsidian-memo/)           | 在 Obsidian 中管理 AI 协作记忆。自动记录用户偏好和纠正，避免同类问题反复犯错。                                                   |
-| [raycast-developers](skills/raycast-developers/) | Raycast 扩展开发 — 基于 TypeScript、React 和 @raycast/api 创建、修改和发布 Raycast 扩展，含完整参考文档。                        |
-| [vertical-codebase](skills/vertical-codebase/)   | 代码架构建议 — 按功能域而非技术层组织代码，走向高内聚、易发现、低耦合的项目结构。                                                |
-| [workplace-writing](skills/workplace-writing/)   | 职场写作教练 — 基于金字塔结构和 SCQA 方法论，帮您编写年终总结、邮件、汇报、方案等各类职场文案。                                  |
-| [zed](skills/zed/)                               | 用 Zed 编辑器打开项目、文件或对比文件差异，支持 Dev Container 和管道输入。                                                       |
-
-## 安装技能
+### 安装所有 Agent Skills
 
 ```bash
-npx skills add git@github.com:gaorun/skills.git
+# 方式一：直接安装
+npx skills add git@github.com:gaorun/my-labs.git
+
+# 方式二：用元 CLI 一键安装
+npx @gaorun/my-cli install
+```
+
+### 安装 CLI 工具
+
+```bash
+npm install -g @gaorun/fe-project-report
+npm install -g @gaorun/page-api-report
+```
+
+## 项目结构
+
+```
+my-labs/
+├── packages/
+│   ├── skills/          # 纯 Agent Skills
+│   ├── cli/             # CLI 工具（每个可附带同名 Skill）
+│   └── extensions/      # 编辑器扩展
+├── skills/              # 聚合产物：所有 Skill（供 git 读取）
+└── scripts/             # 构建脚本
+```
+
+## Skill 一览
+
+| Skill                | 说明                                             |
+| -------------------- | ------------------------------------------------ |
+| `fe-project-report`  | 前端项目探索与报告生成（HTML / Markdown / JSON） |
+| `page-api-report`    | 页面接口发现报告                                 |
+| `name-it-to-tame-it` | 命名降维法 — 给内耗、焦虑起外号                  |
+| `obsidian-memo`      | Obsidian AI 协作记忆管理                         |
+| `raycast-developers` | Raycast 扩展开发参考                             |
+| `vertical-codebase`  | 按功能域组织代码的架构建议                       |
+| `workplace-writing`  | 职场写作教练（金字塔+SCQA）                      |
+| `zed`                | Zed 编辑器 CLI 操作                              |
+
+## 开发
+
+```bash
+pnpm install       # 安装依赖
+pnpm build         # 构建所有包 + 聚合 skills
+pnpm sync:skills   # 仅同步 skills
+pnpm test          # 运行测试
 ```
 
 ## 开源协议

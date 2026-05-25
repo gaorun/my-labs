@@ -1,0 +1,4 @@
+packages:
+  - "packages/skills"
+  - "packages/cli"
+  - "packages/extensions/*"
