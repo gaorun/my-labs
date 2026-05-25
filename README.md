@@ -7,6 +7,7 @@ AI Agent 技能合集
 | 技能                                             | 说明                                                                                                                             |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
 | [fe-project-report](skills/fe-project-report/)   | 前端项目探索与报告生成。自动分析路由、页面功能、接口依赖、微服务使用情况和跳转关系，输出 HTML / Markdown / JSON 格式的项目报告。 |
+| [page-api-report](skills/page-api-report/)       | 页面接口发现报告。从前端视角按用户动线梳理单个页面的所有后端接口调用链路，输出给后端/测试阅读的接口分析报告。                    |
 | [name-it-to-tame-it](skills/name-it-to-tame-it/) | 命名降维法 — 给内耗、焦虑、压力起一个专属外号，主动降低负面感受，从沉浸切换到观察。                                              |
 | [obsidian-memo](skills/obsidian-memo/)           | 在 Obsidian 中管理 AI 协作记忆。自动记录用户偏好和纠正，避免同类问题反复犯错。                                                   |
 | [raycast-developers](skills/raycast-developers/) | Raycast 扩展开发 — 基于 TypeScript、React 和 @raycast/api 创建、修改和发布 Raycast 扩展，含完整参考文档。                        |
