@@ -88,13 +88,13 @@ CLI 基于 [oclif v4](https://oclif.io/)，源文件在 `packages/cli/src/comman
 1. 在 `packages/cli/src/commands/<name>.ts` 中创建 Command 子类：
 
 ```typescript
-import { Command } from '@oclif/core'
+import { Command } from "@oclif/core";
 
 export default class MyCommand extends Command {
-  static description = '命令描述'
+  static description = "命令描述";
 
   async run(): Promise<void> {
-    this.log('Hello from my-cli!')
+    this.log("Hello from my-cli!");
   }
 }
 ```
@@ -133,13 +133,13 @@ pnpm build
 
 ## 构建流水线（turbo.json）
 
-| 任务    | 依赖      | 说明                     |
-| ------- | --------- | ------------------------ |
-| `build` | `^build`  | 先构建依赖包，再构建自身 |
-| `lint`  | `^build`  | 依赖包构建后执行         |
-| `test`  | `^build`  | 依赖包构建后执行         |
-| `dev`   | 无        | 无缓存，持续运行         |
-| `clean` | 无        | 无缓存                   |
+| 任务    | 依赖     | 说明                     |
+| ------- | -------- | ------------------------ |
+| `build` | `^build` | 先构建依赖包，再构建自身 |
+| `lint`  | `^build` | 依赖包构建后执行         |
+| `test`  | `^build` | 依赖包构建后执行         |
+| `dev`   | 无       | 无缓存，持续运行         |
+| `clean` | 无       | 无缓存                   |
 
 ## 新增扩展（extensions）
 
