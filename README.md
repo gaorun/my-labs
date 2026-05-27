@@ -31,16 +31,17 @@ my-labs/
 
 ## Skill 一览
 
-| Skill                | 说明                        |
-| -------------------- | --------------------------- |
-| `fe-project-report`  | 前端项目探索与报告生成      |
-| `page-api-report`    | 页面接口发现报告            |
-| `name-it-to-tame-it` | 命名降维法 — 给焦虑起外号   |
-| `obsidian-memo`      | Obsidian AI 协作记忆管理    |
-| `raycast-developers` | Raycast 扩展开发参考        |
-| `vertical-codebase`  | 按功能域组织代码的架构建议  |
-| `workplace-writing`  | 职场写作教练（金字塔+SCQA） |
-| `zed`                | Zed 编辑器 CLI 操作         |
+| Skill                | 说明                                      |
+| -------------------- | ----------------------------------------- |
+| `api-locator`        | 接口反向溯源 — 从接口出发定位前端使用全貌 |
+| `fe-project-report`  | 前端项目探索与报告生成                    |
+| `page-api-report`    | 页面接口发现报告                          |
+| `name-it-to-tame-it` | 命名降维法 — 给焦虑起外号                 |
+| `obsidian-memo`      | Obsidian AI 协作记忆管理                  |
+| `raycast-developers` | Raycast 扩展开发参考                      |
+| `vertical-codebase`  | 按功能域组织代码的架构建议                |
+| `workplace-writing`  | 职场写作教练（金字塔+SCQA）               |
+| `zed`                | Zed 编辑器 CLI 操作                       |
 
 ## 开发
 

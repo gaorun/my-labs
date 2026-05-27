@@ -38,6 +38,7 @@ my-labs/
 │
 ├── packages/
 │   ├── skills/               # 纯 Agent Skills（无 CLI 对应物）
+│   │   ├── api-locator/
 │   │   ├── fe-project-report/
 │   │   ├── name-it-to-tame-it/
 │   │   ├── obsidian-memo/
@@ -133,16 +134,17 @@ pnpm -r publish --access public
 
 ## 7. 已有 Skill 清单
 
-| Skill                | 类型 | 说明                        |
-| -------------------- | ---- | --------------------------- |
-| `name-it-to-tame-it` | Pure | 命名降维法 — 给焦虑起外号   |
-| `obsidian-memo`      | Pure | Obsidian AI 协作记忆管理    |
-| `raycast-developers` | Pure | Raycast 扩展开发参考        |
-| `vertical-codebase`  | Pure | 按功能域组织代码的架构建议  |
-| `workplace-writing`  | Pure | 职场写作教练（金字塔+SCQA） |
-| `zed`                | Pure | Zed 编辑器 CLI 操作         |
-| `fe-project-report`  | Pure | 前端项目分析报告生成        |
-| `page-api-report`    | Pure | 页面接口分析报告生成        |
+| Skill                | 类型 | 说明                                  |
+| -------------------- | ---- | ------------------------------------- |
+| `name-it-to-tame-it` | Pure | 命名降维法 — 给焦虑起外号             |
+| `obsidian-memo`      | Pure | Obsidian AI 协作记忆管理              |
+| `raycast-developers` | Pure | Raycast 扩展开发参考                  |
+| `vertical-codebase`  | Pure | 按功能域组织代码的架构建议            |
+| `workplace-writing`  | Pure | 职场写作教练（金字塔+SCQA）           |
+| `zed`                | Pure | Zed 编辑器 CLI 操作                   |
+| `api-locator`        | Pure | 接口反向溯源 — 接口→页面/字段使用全貌 |
+| `fe-project-report`  | Pure | 前端项目分析报告生成                  |
+| `page-api-report`    | Pure | 页面接口分析报告生成                  |
 
 ## 8. 迭代记录
 
@@ -150,9 +152,10 @@ pnpm -r publish --access public
 
 | 日期       | 版本   | 变更内容                                                                                                                                             |
 | ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-05-27 | v0.3.0 | 新增 `api-locator` Skill：从接口反向溯源前端使用全貌，支持 Q&A 即时问答和报告模式                                                                    |
 | 2026-05-25 | v0.2.0 | 新增项目级开发技能（`.agents/skills/dev`、`test`、`deploy`）；整理 README.md 同步当前项目结构                                                        |
 | 2026-05-25 | v0.1.0 | 🎉 初始化 monorepo 骨架：建立 packages/skills + packages/cli + packages/extensions 三层结构；迁移 8 个已有 skill；创建 my-cli 元安装器（基于 oclif） |
 
 ---
 
-_最后更新: 2026-05-25_
+_最后更新: 2026-05-27_
