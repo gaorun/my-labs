@@ -1,7 +1,7 @@
 # AGENTS.md
 
 > my-labs 项目总体规划与架构文档。
-> **每次重大迭代后自动更新此文件**，确保始终反映最新的项目结构和设计决策。
+> **每次重大更新请同步此文件。**
 
 ---
 
@@ -31,7 +31,7 @@ my-labs/
 ├── pnpm-workspace.yaml       # pnpm monorepo 配置
 ├── tsconfig.base.json        # 共享 TypeScript 配置
 ├── turbo.json                # Turborepo pipeline
-├── AGENTS.md                 # ← 本文件：项目规划（每次迭代更新）
+├── AGENTS.md                 # ← 本文件：项目规划
 ├── README.md                 # 用户文档
 ├── .gitignore
 ├── LICENSE                   # MIT
@@ -118,8 +118,7 @@ pnpm -r publish --access public
 1. **Skill 是核心资产** — Agent Skill 统一存放在 `packages/skills/`，通过 git 分发。
 2. **单一 CLI 入口** — `packages/cli/` 是基于 oclif 的唯一 CLI，所有命令在此扩展。
 3. **一个命令搞定一切** — `pnpm build` 编译所有包。
-4. **文档同步** — 任何功能变更（新增 Skill、CLI 命令、目录结构调整等）必须同步更新 `README.md`。
-5. **示例脱敏** — 所有 SKILL.md 中的示例数据（文件路径、接口名、业务名词、变量名、公司/产品名称等）必须使用通用占位名称，禁止出现任何真实项目的数据。公开仓库，避免泄露。
+4. **示例脱敏** — 所有 SKILL.md 中的示例数据（文件路径、接口名、业务名词、变量名、公司/产品名称等）必须使用通用占位名称，禁止出现任何真实项目的数据。公开仓库，避免泄露。
 
 ## 6. 技术栈
 
@@ -145,20 +144,4 @@ pnpm -r publish --access public
 | `zed`                | Pure | Zed 编辑器 CLI 操作                              |
 | `api-locator`        | Pure | 接口反向溯源 — 接口→页面/字段使用全貌            |
 | `fe-project-report`  | Pure | 前端项目分析报告生成                             |
-| `page-api-report`    | Pure | 页面接口分析报告生成                             |
 | `mermaid-cli`        | Pure | mermaid-cli (mmdc) Mermaid 图表渲染 CLI 使用指南 |
-
-## 8. 迭代记录
-
-> 每次重大变更后在此记录，保持时间倒序。
-
-| 日期       | 版本   | 变更内容                                                                                                                                             |
-| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-06-01 | v0.3.1 | 新增 `mermaid-cli` Skill：Mermaid 图表 CLI 渲染工具使用指南                                                                                          |
-| 2026-05-27 | v0.3.0 | 新增 `api-locator` Skill：从接口反向溯源前端使用全貌，支持 Q&A 即时问答和报告模式                                                                    |
-| 2026-05-25 | v0.2.0 | 新增项目级开发技能（`.agents/skills/dev`、`test`、`deploy`）；整理 README.md 同步当前项目结构                                                        |
-| 2026-05-25 | v0.1.0 | 🎉 初始化 monorepo 骨架：建立 packages/skills + packages/cli + packages/extensions 三层结构；迁移 8 个已有 skill；创建 my-cli 元安装器（基于 oclif） |
-
----
-
-_最后更新: 2026-05-27_
