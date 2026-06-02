@@ -134,14 +134,15 @@ pnpm -r publish --access public
 
 ## 7. 已有 Skill 清单
 
-| Skill                | 类型 | 说明                                             |
-| -------------------- | ---- | ------------------------------------------------ |
-| `name-it-to-tame-it` | Pure | 命名降维法 — 给焦虑起外号                        |
-| `obsidian-memo`      | Pure | Obsidian AI 协作记忆管理                         |
-| `raycast-developers` | Pure | Raycast 扩展开发参考                             |
-| `vertical-codebase`  | Pure | 按功能域组织代码的架构建议                       |
-| `workplace-writing`  | Pure | 职场写作教练（金字塔+SCQA）                      |
-| `zed`                | Pure | Zed 编辑器 CLI 操作                              |
-| `api-locator`        | Pure | 接口反向溯源 — 接口→页面/字段使用全貌            |
-| `fe-project-report`  | Pure | 前端项目分析报告生成                             |
-| `mermaid-cli`        | Pure | mermaid-cli (mmdc) Mermaid 图表渲染 CLI 使用指南 |
+| Skill                | 类型 | 说明                                                                |
+| -------------------- | ---- | ------------------------------------------------------------------- |
+| `name-it-to-tame-it` | Pure | 命名降维法 — 给焦虑起外号                                           |
+| `obsidian-memo`      | Pure | Obsidian AI 协作记忆管理                                            |
+| `raycast-developers` | Pure | Raycast 扩展开发参考                                                |
+| `vertical-codebase`  | Pure | 按功能域组织代码的架构建议                                          |
+| `workplace-writing`  | Pure | 职场写作教练（金字塔+SCQA）                                         |
+| `zed`                | Pure | Zed 编辑器 CLI 操作                                                 |
+| `api-locator`        | Pure | 接口反向溯源 — 接口→页面/字段使用全貌（即将被 frontend-scout 替代） |
+| `frontend-scout`     | Pure | 统一接口侦察 — 接口溯源/页面发现/项目摸底/PRD 变更影响分析          |
+| `fe-project-report`  | Pure | 前端项目分析报告生成                                                |
+| `mermaid-cli`        | Pure | mermaid-cli (mmdc) Mermaid 图表渲染 CLI 使用指南                    |
