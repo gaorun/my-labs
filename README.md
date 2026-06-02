@@ -29,6 +29,22 @@ my-labs/
 └── tsconfig.base.json   # 共享 TypeScript 配置
 ```
 
+## Skills 清单
+
+| Skill                | 说明                                                       |
+| -------------------- | ---------------------------------------------------------- |
+| `frontend-scout`     | 统一接口侦察 — 接口溯源/页面发现/项目摸底/PRD 变更影响分析 |
+| `api-locator`        | 接口反向溯源（即将被 frontend-scout 替代）                 |
+| `fe-project-report`  | 前端项目分析报告生成                                       |
+| `page-api-report`    | 页面接口发现报告                                           |
+| `name-it-to-tame-it` | 命名降维法 — 给焦虑起外号                                  |
+| `obsidian-memo`      | Obsidian AI 协作记忆管理                                   |
+| `raycast-developers` | Raycast 扩展开发参考                                       |
+| `vertical-codebase`  | 按功能域组织代码的架构建议                                 |
+| `workplace-writing`  | 职场写作教练                                               |
+| `zed`                | Zed 编辑器 CLI 操作                                        |
+| `mermaid-cli`        | Mermaid 图表渲染 CLI 使用指南                              |
+
 ## 开发
 
 ```bash
